@@ -20,19 +20,27 @@ fun main(args: Array<String>) {
     runApplication<DemoApplication>(*args)
 }
 
+// [handler struct]
+data class PostMessageRequest(val text: String)
+
 @RestController
 class MessageResource(val service: MessageService) {
     @GetMapping
     fun index(): List<Message> = service.findMessages()
 
     @PostMapping
-    fun post(@RequestBody message: Message) {
+    fun post(@RequestBody message: PostMessageRequest) {
         service.post(message)
     }
 }
 
-@Table("messages")
-data class Message(@Id val id: String?, val text: String)
+// @Table("messages")
+// data class Message(@Id val id: String?, val text: String)
+object Message : Table("messages") {
+    val id = uuid("id")
+    override val primaryKey: PrimaryKey = PrimaryKey(id)
+    val text = varchar("name", 1000)
+}
 
 interface MessageRepository : CrudRepository<Message, String>{
 
@@ -45,7 +53,10 @@ class MessageService(val db: MessageRepository) {
 
     fun findMessages(): List<Message> = db.findMessages()
 
-    fun post(message: Message){
-        db.save(message)
+    fun post(message: PostMessageRequest){
+        val i = Message.insert {
+            it[id] = "1234",
+            it[text] = message.text,
+        }
     }
 }
