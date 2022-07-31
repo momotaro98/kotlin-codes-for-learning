@@ -6,6 +6,10 @@
  * User Manual available at https://docs.gradle.org/7.5/userguide/building_java_projects.html
  */
 
+val ktor_version: String by project
+val kotlin_version: String by project
+val logback_version: String by project
+
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.6.21"
@@ -29,6 +33,14 @@ dependencies {
     // This dependency is used by the application.
     implementation("com.google.guava:guava:31.0.1-jre")
 
+    // ktor tutorial //
+    implementation("io.ktor:ktor-server-core:$ktor_version")
+    implementation("io.ktor:ktor-server-netty:$ktor_version")
+    implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
+    implementation("ch.qos.logback:logback-classic:$logback_version")
+    testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
+
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 
@@ -38,5 +50,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("sample.app.AppKt")
+    mainClass.set("io.ktor.server.netty.EngineMain")
 }

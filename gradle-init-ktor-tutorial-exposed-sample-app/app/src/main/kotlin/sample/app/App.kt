@@ -3,13 +3,16 @@
  */
 package sample.app
 
-class App {
-    val greeting: String
-        get() {
-            return "Hello World!"
-        }
-}
+import io.ktor.server.application.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 
-fun main() {
-    println(App().greeting)
+fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+
+fun Application.module() {
+    routing {
+        get("/") {
+            call.respondText("Hello, world!")
+        }
+    }
 }
