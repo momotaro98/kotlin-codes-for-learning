@@ -11,6 +11,7 @@ val kotlin_version: String by project
 val logback_version: String by project
 
 val exposed_version: String by project
+val mysql_version: String by project
 
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
@@ -49,7 +50,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
     // mysql
-    implementation("mysql:mysql-connector-java:8.0.26") // version :8.0.x is needed
+    implementation("mysql:mysql-connector-java:$mysql_version") // version is needed
 
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")
