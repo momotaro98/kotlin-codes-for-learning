@@ -9,7 +9,7 @@ object DatabaseFactory {
     fun init() {
         var driverClassName = "com.mysql.jdbc.Driver"
         val jdbcURL = "jdbc:mysql://localhost:13306/dev_db"
-        val database = Database.connect(jdbcURL, driverClassName)
+        val database = Database.connect(jdbcURL, driver = driverClassName, user = "root", password = "mysql")
         // transaction(database) {
         //     SchemaUtils.create(Articles)
         // }

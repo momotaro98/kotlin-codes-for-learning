@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:8.0.26
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    restart: always
+    volumes:
+      - ./app/src/main/resources/sql:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      BIND-ADDRESS: 0.0.0.0
+    ports:
+      - 13306:3306
